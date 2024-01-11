@@ -1,24 +1,39 @@
 import { getUserAuth } from "@/lib/auth/utils";
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, SignInButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/ui/ThemeToggle";
+import Image from "next/image";
 
 export default async function Navbar() {
   const { session } = await getUserAuth();
 
-  if (session?.user) {
-    return (
-      <div className="bg-popover border-b mb-2 md:p-0 px-4">
-      <nav className="py-2 flex items-center justify-between transition-all duration-300 max-w-3xl mx-auto">
+  return (
+    <div className="bg-popover border-b mb-2 md:p-0 px-4">
+      <nav className="py-2 flex items-center justify-between transition-all duration-300 max-w-5xl mx-auto">
         <h1 className="font-semibold hover:opacity-75 transition-hover cursor-pointer">
-          <Link href="/">Logo</Link>
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo.png"
+              alt="PlateMateAI logo"
+              height={60}
+              width={60}
+            />
+            AI Meal Planner
+          </Link>
         </h1>
-        <div className="space-x-2 flex items-center">
+        <div className="space-x-4 flex items-center">
+          <Link href="/faq">FAQ</Link>
+          <Link href="/dashboard">Dashboard</Link>
+          <div className="flex justify-end w-16">
+            {session?.user ? (
+              <UserButton afterSignOutUrl="/" />
+            ) : (
+              <SignInButton />
+            )}
+          </div>
           <ModeToggle />
-          <UserButton afterSignOutUrl="/" />
         </div>
       </nav>
-      </div>
-    );
-  } else return null;
+    </div>
+  );
 }
