@@ -8,8 +8,8 @@ export default async function Navbar() {
   const { session } = await getUserAuth();
 
   return (
-    <div className="bg-popover border-b mb-2 md:p-0 px-4">
-      <nav className="py-2 flex items-center justify-between transition-all duration-300 max-w-5xl mx-auto">
+    <div className="bg-popover border-b">
+      <nav className="p-2 flex items-center justify-between transition-all duration-300 max-w-5xl mx-auto">
         <h1 className="font-semibold hover:opacity-75 transition-hover cursor-pointer">
           <Link href="/" className="flex items-center gap-2">
             <Image
