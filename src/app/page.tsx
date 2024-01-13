@@ -124,7 +124,8 @@ export default async function Home() {
               </div>
               <div className="text-black text-xl font-medium leading-8 my-8">
                 We carry out in-depth market research to identify the type of
-                traffic you need and boost conversions. By doing this, you'll
+                traffic you need and boost conversions. By doing this,{" "}
+                {"you'll"}
                 get a high volume of qualified traffic, compared to using a
                 scatter-gun approach.
               </div>
@@ -187,7 +188,7 @@ export default async function Home() {
               </div>{" "}
               <div className="text-black text-xl font-medium leading-8 mt-9">
                 Our SEO experts know exactly how to find keywords that move the
-                needle. We don't just go for the highest search volume keywords,
+                needle. We dont just go for the highest search volume keywords,
                 although these are important to include. We also ensure that we
                 include niche-specific keywords to attract the right people to
                 your site.
@@ -200,10 +201,10 @@ export default async function Home() {
                 Penalty Prevention
               </div>
               <div className="text-black text-xl font-medium leading-8 mt-9 mb-12 max-md:mb-10">
-                There's nothing more devastating to your results than receiving
-                a penalty. We've helped hundreds of companies recover from other
-                link builders penalties and set them back on the path of
-                success.
+                {"There's"} nothing more devastating to your results than
+                receiving a penalty. {"We've"} helped hundreds of companies
+                recover from other link builders penalties and set them back on
+                the path of success.
               </div>
             </span>
           </div>
@@ -231,7 +232,8 @@ export default async function Home() {
                 </span>
                 <br />
                 We carry out in-depth market research to identify the type of
-                traffic you need and boost conversions. By doing this, you'll
+                traffic you need and boost conversions. By doing this,{" "}
+                {"you'll"}
                 get a high volume of qualified traffic, compared to using a
                 scatter-gun approach.
                 <br />
@@ -723,9 +725,7 @@ export default async function Home() {
           </div>{" "}
           <div className="flex flex-col items-stretch w-[49%] ml-5 max-md:w-full max-md:ml-0">
             <span className="flex grow flex-col items-stretch mt-28 px-5 max-md:max-w-full max-md:mt-10">
-              <div className="text-violet-500 text-5xl font-bold leading-[72px] tracking-tight capitalize max-md:max-w-full max-md:text-4xl max-md:leading-[70px]">
-                <div _text="" />
-              </div>{" "}
+              <div className="text-violet-500 text-5xl font-bold leading-[72px] tracking-tight capitalize max-md:max-w-full max-md:text-4xl max-md:leading-[70px]"></div>{" "}
               <div className="text-black text-2xl leading-10 mt-12 max-md:max-w-full max-md:mt-10">
                 This is due to their excellent service, competitive pricing and
                 customer support. It’s throughly refresing to get such a
