@@ -55,12 +55,10 @@ export default function RootLayout({
           <ClerkProvider>
             {/* <div> */}
             <Navbar />
-            {/* <main className="max-w-3xl mx-auto md:p-0 px-4 mt-4"> */}
-            {children}
-            {/* </main> */}
-            {/* </div> */}
+            <main className="mt-6 p-6 max-w-5xl mx-auto shadow bg-popover rounded-xl">
+              {children}
+            </main>
           </ClerkProvider>
-
           <Toaster />
         </ThemeProvider>
       </body>

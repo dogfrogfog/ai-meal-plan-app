@@ -3,6 +3,7 @@ import Link from "next/link";
 import { UserButton, SignInButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/ui/ThemeToggle";
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 export default async function Navbar() {
   const { session } = await getUserAuth();
@@ -22,8 +23,12 @@ export default async function Navbar() {
           </Link>
         </h1>
         <div className="space-x-4 flex items-center">
-          <Link href="/faq">FAQ</Link>
-          <Link href="/dashboard">Dashboard</Link>
+          <span className="px-4 py-2 text-sm rounded-xl bg-gray-300">
+            <span className="mr-1 bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+              2000
+            </span>
+            tokens
+          </span>
           <div className="flex justify-end w-16">
             {session?.user ? (
               <UserButton afterSignOutUrl="/" />
