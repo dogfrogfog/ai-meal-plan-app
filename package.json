@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,7 +12,8 @@
     "db:drop": "drizzle-kit drop",
     "db:pull": "drizzle-kit introspect:pg",
     "db:studio": "drizzle-kit studio",
-    "db:check": "drizzle-kit check:pg"
+    "db:check": "drizzle-kit check:pg",
+    "db:sync-prod": "yarn db:generate && yarn db:migrate"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.1",
