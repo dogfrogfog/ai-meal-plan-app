@@ -25,7 +25,7 @@ export function TokensTab() {
       </Card>
 
       <div className="flex justify-center gap-8 mt-12">
-        <Card className="w-[350px] shadow-lg bg-white flex justify-between flex-col">
+        <Card className="w-[350px] shadow-lg bg-accent flex justify-between flex-col">
           <div>
             <CardHeader>
               <CardTitle className="flex gap-2 mb-4">
@@ -45,7 +45,7 @@ export function TokensTab() {
             <Button className="w-full">Pay</Button>
           </CardFooter>
         </Card>
-        <Card className="w-[350px] shadow-lg bg-white border-2 transition-all hover:scale-105 border-purple-400 flex justify-between flex-col">
+        <Card className="w-[350px] shadow-lg bg-accent border-2 transition-all hover:scale-105 border-purple-400 flex justify-between flex-col">
           <div>
             <CardHeader>
               <CardTitle className="flex gap-2 mb-4">
@@ -73,7 +73,7 @@ export function TokensTab() {
             <Button className="w-full">Pay</Button>
           </CardFooter>
         </Card>
-        <Card className="w-[350px] shadow-lg bg-white flex justify-between flex-col">
+        <Card className="w-[350px] shadow-lg bg-accent flex justify-between flex-col">
           <div>
             <CardHeader>
               <CardTitle className="flex gap-2 mb-4">

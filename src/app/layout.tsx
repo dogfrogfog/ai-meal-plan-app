@@ -55,7 +55,7 @@ export default function RootLayout({
           <ClerkProvider>
             {/* <div> */}
             <Navbar />
-            <main className="mt-6 p-6 max-w-5xl mx-auto shadow bg-popover rounded-xl">
+            <main className="mt-6 p-6 max-w-5xl mx-auto shadow bg-popover rounded-x">
               {children}
             </main>
           </ClerkProvider>
