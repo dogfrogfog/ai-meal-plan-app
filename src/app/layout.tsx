@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,9 +50,14 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="bg-red-700 text-white font-[200] text-sm p-2 flex gap-2">
           work in progress | wip | Follow out X for more updates |
-          <Link href="https://twitter.com/platemateai" className="font-bold">
+          <a
+            href="https://twitter.com/platemateai"
+            className="font-bold"
+            rel="noreferrer"
+            target="_blank"
+          >
             https://twitter.com/platemateai
-          </Link>
+          </a>
         </div>
         <ThemeProvider
           attribute="class"
@@ -60,14 +66,24 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ClerkProvider>
-            {/* <div> */}
             <Navbar />
             <main className="mt-6 p-6 max-w-5xl mx-auto shadow bg-popover rounded-x">
+              <div className="flex justify-between mb-24">
+                <h1 className="text-4xl font-semibold">Dashboard</h1>
+                <Link href="/">
+                  <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+                    Generation
+                  </span>
+                </Link>
+                <Link href="/history">History</Link>
+                <Link href="/tokens">Tokens</Link>
+              </div>
               {children}
             </main>
           </ClerkProvider>
           <Toaster />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

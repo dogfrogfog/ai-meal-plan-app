@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import React from "react";
 
-export function TokensTab() {
+export function TokensPage() {
   return (
     <>
       <Card className="w-[350px]">
