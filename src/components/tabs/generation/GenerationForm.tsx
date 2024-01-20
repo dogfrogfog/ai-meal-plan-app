@@ -50,8 +50,8 @@ export function GenerationForm({
       }
     } catch (e) {
       toast({
-        title: "Error occured. Please, try later.",
-        description: JSON.stringify(e),
+        title: "We are testing. Pease, try later.",
+        description: "Subscribe to out X at the meantime - @platemateai",
         variant: "destructive",
       });
     } finally {
