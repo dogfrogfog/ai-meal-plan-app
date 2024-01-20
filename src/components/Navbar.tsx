@@ -1,9 +1,8 @@
 import { getUserAuth } from "@/lib/auth/utils";
 import Link from "next/link";
-import { UserButton, SignInButton } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/ui/ThemeToggle";
 import Image from "next/image";
-import { Button } from "./ui/button";
 
 export default async function Navbar() {
   const { session } = await getUserAuth();
@@ -12,7 +11,7 @@ export default async function Navbar() {
     <div className="bg-popover border-b">
       <nav className="p-2 flex items-center justify-between transition-all duration-300 max-w-5xl mx-auto">
         <h1 className="font-semibold hover:opacity-75 transition-hover cursor-pointer">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 blur">
             <Image
               src="/logo.png"
               alt="PlateMateAI logo"
@@ -30,11 +29,7 @@ export default async function Navbar() {
             tokens
           </span>
           <div className="flex justify-end w-16">
-            {session?.user ? (
-              <UserButton afterSignOutUrl="/" />
-            ) : (
-              <SignInButton />
-            )}
+            <UserButton afterSignOutUrl="/sign-in" />
           </div>
           <ModeToggle />
         </div>
