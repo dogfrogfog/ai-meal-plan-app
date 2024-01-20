@@ -72,6 +72,7 @@ export function GenerationForm({
                 <Input
                   disabled={isLoading}
                   placeholder="I want to eat 2000 callories a day. Provide me with a meal plan for 3 days."
+                  // placeholder="Demo prompt lorem ipsum"
                   {...field}
                 />
               </FormControl>

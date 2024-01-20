@@ -1,7 +1,3 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/ztCDb4rMljn
- */
 import { Button } from "@/components/ui/button";
 import {
   CardTitle,
@@ -38,7 +34,8 @@ export function TokensTab() {
             <CardContent>
               <div className="flex items-center space-x-2">
                 <CheckIcon className="text-green-500" />
-                <span>Sign Up bonus</span>
+                <span>Grab a bonus</span>
+                11111
               </div>
             </CardContent>
           </div>

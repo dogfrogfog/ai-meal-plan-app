@@ -11,7 +11,7 @@ export const getGenerations = async () => {
   return { generations: g };
 };
 
-export const getGenerationsById = async (id: GenerationId) => {
+export const getGenerationById = async (id: GenerationId) => {
   const { id: generationId } = generationIdSchema.parse({ id });
   const [g] = await db
     .select()

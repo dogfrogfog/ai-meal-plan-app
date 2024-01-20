@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,6 +47,12 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={inter.className}>
+        <div className="bg-red-700 text-white font-[200] text-sm p-2 flex gap-2">
+          work in progress | wip | Follow out X for more updates |
+          <Link href="https://twitter.com/platemateai" className="font-bold">
+            https://twitter.com/platemateai
+          </Link>
+        </div>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
