@@ -22,7 +22,7 @@ export default function TokensPage() {
       </Card>
 
       <div className="flex justify-center gap-8 mt-12">
-        <Card className="w-[350px] shadow-lg bg-accent flex justify-between flex-col">
+        <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
           <div>
             <CardHeader>
               <CardTitle className="flex gap-2 mb-4">
@@ -35,12 +35,13 @@ export default function TokensPage() {
               <div className="flex items-center space-x-2">
                 <CheckIcon className="text-green-500" />
                 <span>Grab a bonus</span>
-                11111
               </div>
             </CardContent>
           </div>
           <CardFooter>
-            <Button className="w-full">Pay</Button>
+            <Button className="w-full px-6 py-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600">
+              Claim bonus tokens
+            </Button>
           </CardFooter>
         </Card>
         <Card className="w-[350px] shadow-lg bg-accent border-2 transition-all hover:scale-105 border-purple-400 flex justify-between flex-col">
@@ -71,7 +72,7 @@ export default function TokensPage() {
             <Button className="w-full">Pay</Button>
           </CardFooter>
         </Card>
-        <Card className="w-[350px] shadow-lg bg-accent flex justify-between flex-col">
+        <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
           <div>
             <CardHeader>
               <CardTitle className="flex gap-2 mb-4">

@@ -7,6 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
+import { Header } from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -68,16 +69,7 @@ export default function RootLayout({
           <ClerkProvider>
             <Navbar />
             <main className="mt-6 p-6 max-w-5xl mx-auto shadow bg-popover rounded-x">
-              <div className="flex justify-between mb-24">
-                <h1 className="text-4xl font-semibold">Dashboard</h1>
-                <Link href="/">
-                  <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
-                    Generation
-                  </span>
-                </Link>
-                <Link href="/history">History</Link>
-                <Link href="/tokens">Tokens</Link>
-              </div>
+              <Header />
               {children}
             </main>
           </ClerkProvider>
