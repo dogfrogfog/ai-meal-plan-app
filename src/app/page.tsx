@@ -23,7 +23,9 @@ export default function Home() {
               </span>
             </TabsTrigger>
             <TabsTrigger value="history">History</TabsTrigger>
-            <TabsTrigger value="tokens">Tokens</TabsTrigger>
+            <TabsTrigger disabled value="tokens">
+              Tokens
+            </TabsTrigger>
           </TabsList>
         </div>
 
