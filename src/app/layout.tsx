@@ -5,9 +5,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
-import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 

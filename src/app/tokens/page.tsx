@@ -7,6 +7,8 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import React from "react";
+import { ClaimFreeTokensForm } from '@/components/ClaimFreeTokensForm'
+import { TokensCount } from '@/components/header/TokensCount'
 
 export default function TokensPage() {
   return (
@@ -16,7 +18,9 @@ export default function TokensPage() {
           <CardTitle>Tokens left</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-3xl font-semibold">2000</p>
+          <p className="text-3xl font-semibold">
+              <TokensCount />
+          </p>
           {/* <p className="text-sm text-gray-500">~ 10 recipes</p> */}
         </CardContent>
       </Card>
@@ -39,9 +43,7 @@ export default function TokensPage() {
             </CardContent>
           </div>
           <CardFooter>
-            <Button className="w-full px-6 py-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600">
-              Claim bonus tokens
-            </Button>
+            <ClaimFreeTokensForm />
           </CardFooter>
         </Card>
         <Card className="w-[350px] shadow-lg bg-accent border-2 transition-all hover:scale-105 border-purple-400 flex justify-between flex-col">

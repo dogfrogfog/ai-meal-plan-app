@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
 import { createGeneration } from "@/lib/api/generations/mutations";
 
 import {
@@ -17,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { SubmitButton } from "./SubmitButton";
 
 const formSchema = z.object({
   prompt: z.string().min(2, {
@@ -81,9 +81,7 @@ export function GenerationForm({
           )}
         />
         <div className="pt-12">
-          <Button className="block w-full" disabled={isLoading} type="submit">
-            Generate plan
-          </Button>
+          <SubmitButton>Generate plan</SubmitButton>
         </div>
       </form>
     </Form>
