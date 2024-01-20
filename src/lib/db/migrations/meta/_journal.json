@@ -15,6 +15,13 @@
       "when": 1705762268820,
       "tag": "0001_worried_the_fallen",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1705763755574,
+      "tag": "0002_cooing_selene",
+      "breakpoints": true
     }
   ]
 }

@@ -10,6 +10,7 @@ import {
   Card,
   CardFooter,
 } from "@/components/ui/card";
+import React from "react";
 
 export function TokensTab() {
   return (
@@ -114,7 +115,7 @@ export function TokensTab() {
   );
 }
 
-function CheckIcon(props: any) {
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -133,7 +134,7 @@ function CheckIcon(props: any) {
   );
 }
 
-function DeleteIcon(props: any) {
+function DeleteIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -154,7 +155,7 @@ function DeleteIcon(props: any) {
   );
 }
 
-function GiftIcon(props: any) {
+function GiftIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -177,7 +178,7 @@ function GiftIcon(props: any) {
   );
 }
 
-function StarIcon(props: any) {
+function StarIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

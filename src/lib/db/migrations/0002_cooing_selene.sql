@@ -1,0 +1,1 @@
+ALTER TABLE "generations" DROP CONSTRAINT "generations_clerk_user_id_unique";
