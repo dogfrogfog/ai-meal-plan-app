@@ -6,9 +6,9 @@ import {
   Card,
   CardFooter,
 } from "@/components/ui/card";
-import React from "react";
-import { ClaimFreeTokensForm } from '@/components/ClaimFreeTokensForm'
-import { TokensCount } from '@/components/header/TokensCount'
+import React, { Suspense } from "react";
+import { ClaimFreeTokensForm } from "@/components/ClaimFreeTokensForm";
+import { TokensCount } from "@/components/header/TokensCount";
 
 export default function TokensPage() {
   return (
@@ -19,7 +19,9 @@ export default function TokensPage() {
         </CardHeader>
         <CardContent>
           <p className="text-3xl font-semibold">
+            <Suspense fallback={""}>
               <TokensCount />
+            </Suspense>
           </p>
           {/* <p className="text-sm text-gray-500">~ 10 recipes</p> */}
         </CardContent>
@@ -43,7 +45,9 @@ export default function TokensPage() {
             </CardContent>
           </div>
           <CardFooter>
-            <ClaimFreeTokensForm />
+            <Suspense>
+              <ClaimFreeTokensForm />
+            </Suspense>
           </CardFooter>
         </Card>
         <Card className="w-[350px] shadow-lg bg-accent border-2 transition-all hover:scale-105 border-purple-400 flex justify-between flex-col">
