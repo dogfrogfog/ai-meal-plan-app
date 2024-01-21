@@ -9,6 +9,7 @@ import {
 import React, { Suspense } from "react";
 import { ClaimFreeTokensForm } from "@/components/ClaimFreeTokensForm";
 import { TokensCount } from "@/components/header/TokensCount";
+import { StripeCheckoutButton } from "@/components/StripeCheckoutButton";
 
 export default function TokensPage() {
   return (
@@ -33,7 +34,7 @@ export default function TokensPage() {
             <CardHeader>
               <CardTitle className="flex gap-2 mb-4">
                 <GiftIcon className="text-blue-500" />
-                750 tokens
+                2000 tokens
               </CardTitle>
               <h3 className="text-3xl font-bold mt-4">Free</h3>
             </CardHeader>
@@ -55,9 +56,9 @@ export default function TokensPage() {
             <CardHeader>
               <CardTitle className="flex gap-2 mb-4">
                 <StarIcon className="text-yellow-400" />
-                3000 tokens
+                5000 tokens
               </CardTitle>
-              <h3 className="text-3xl font-bold mt-4">$3.49</h3>
+              <h3 className="text-3xl font-bold mt-4">$3.99</h3>
             </CardHeader>
             <CardContent>
               <div className="flex items-center space-x-2">
@@ -75,7 +76,10 @@ export default function TokensPage() {
             </CardContent>
           </div>
           <CardFooter>
-            <Button className="w-full">Pay</Button>
+            <StripeCheckoutButton
+              priceInCents={399}
+              productName="Pack of 5000 generation tokens 🪄"
+            />
           </CardFooter>
         </Card>
         <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
@@ -83,7 +87,7 @@ export default function TokensPage() {
             <CardHeader>
               <CardTitle className="flex gap-2 mb-4">
                 <DeleteIcon className="text-gray-500" />
-                10000 tokens
+                15000 tokens
               </CardTitle>
               <h3 className="text-3xl font-bold mt-4">$9.99</h3>
             </CardHeader>
@@ -111,7 +115,10 @@ export default function TokensPage() {
             </CardContent>
           </div>
           <CardFooter>
-            <Button className="w-full">Pay</Button>
+            <StripeCheckoutButton
+              priceInCents={999}
+              productName="The biggest pack of 15000 generation tokens 🦾"
+            />
           </CardFooter>
         </Card>
       </div>
