@@ -1,12 +1,6 @@
 import { headers } from "next/headers";
 import stripe, { Stripe } from "@/lib/stripe";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 const webhookSecret =
   process.env.STRIPE_WEBHOOK_SECRET ||
   "whsec_b4785990e0211498ba75aa2dd2e89575a7a28ab821de9258d42f6dd45bdb9b79";
