@@ -29,6 +29,27 @@
       "when": 1705771031696,
       "tag": "0003_nostalgic_micromax",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1705858496926,
+      "tag": "0004_steady_bill_hollister",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1705858538547,
+      "tag": "0005_red_puma",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1706037643379,
+      "tag": "0006_useful_roulette",
+      "breakpoints": true
     }
   ]
 }

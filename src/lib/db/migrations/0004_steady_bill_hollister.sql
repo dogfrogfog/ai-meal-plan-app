@@ -1,0 +1,1 @@
+ALTER TABLE "wallets" ALTER COLUMN "tokens" SET DEFAULT 0;
