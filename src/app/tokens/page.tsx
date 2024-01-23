@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import React, { Suspense } from "react";
 import {
   CardTitle,
   CardHeader,
@@ -6,10 +6,10 @@ import {
   Card,
   CardFooter,
 } from "@/components/ui/card";
-import React, { Suspense } from "react";
 import { ClaimFreeTokensForm } from "@/components/ClaimFreeTokensForm";
 import { TokensCount } from "@/components/header/TokensCount";
 import { StripeCheckoutButton } from "@/components/StripeCheckoutButton";
+import { FREE_TOKENS_NUMBER } from "@/lib/constants";
 
 export default function TokensPage() {
   return (
@@ -34,7 +34,7 @@ export default function TokensPage() {
             <CardHeader>
               <CardTitle className="flex gap-2 mb-4">
                 <GiftIcon className="text-blue-500" />
-                2000 tokens
+                {FREE_TOKENS_NUMBER} tokens
               </CardTitle>
               <h3 className="text-3xl font-bold mt-4">Free</h3>
             </CardHeader>

@@ -1,0 +1,1 @@
+ALTER TABLE "wallets" ADD COLUMN "is_bonus_collected" boolean DEFAULT false NOT NULL;

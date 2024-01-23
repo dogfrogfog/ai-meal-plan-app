@@ -1,5 +1,7 @@
 import { headers } from "next/headers";
 import stripe, { Stripe } from "@/lib/stripe";
+import { updateWallet } from "@/lib/api/wallets/mutations";
+import { getWalletByClerkUserId } from "@/lib/api/wallets/queries";
 
 const webhookSecret =
   process.env.STRIPE_WEBHOOK_SECRET ||
@@ -19,14 +21,37 @@ export async function POST(req: Request) {
     }
   }
 
-  switch (event?.type) {
-    case "payment_intent.succeeded":
-      console.log("PaymentIntent was successful!");
+  // @ts-ignore
+  const { clerkUserId } = event?.data.object?.metadata || {};
 
-      console.log("🧊🧊🧊🧊🧊🧊🧊");
+  if (!clerkUserId || !event) {
+    return Response.json({ status: 401 });
+  }
+
+  switch (event.type) {
+    case "checkout.session.completed":
+      const moneyReceived = event.data.object.amount_total;
+
+      let tokens = 0;
+      if (moneyReceived === 399) {
+        tokens = 5000;
+      }
+
+      if (moneyReceived === 999) {
+        tokens = 15000;
+      }
+
+      // делаем лишний запрос, надо переписать чтобы делать только 1 запрос
+      const { wallet } = await getWalletByClerkUserId(clerkUserId);
+
+      await updateWallet(clerkUserId, {
+        tokens: wallet.tokens + tokens,
+        updatedAt: new Date(),
+        isBonusCollected: false,
+      });
       break;
     default:
-      console.log(`Unhandled event type ${event?.type}`);
+      console.log(`Unhandled stripe event type ${event?.type}`);
   }
 
   return Response.json({ status: 200 });

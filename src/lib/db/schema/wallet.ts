@@ -1,10 +1,18 @@
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { pgTable, serial, text, integer, timestamp } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  serial,
+  text,
+  integer,
+  timestamp,
+  boolean,
+} from "drizzle-orm/pg-core";
 
 export const wallets = pgTable("wallets", {
   id: serial("id").primaryKey(),
   tokens: integer("tokens").notNull().default(0),
+  isBonusCollected: boolean("is_bonus_collected").notNull().default(false),
   clerkUserId: text("clerk_user_id").notNull().unique(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
@@ -19,6 +27,7 @@ export const walletClerkUserIdSchema = selectWalletSchema.pick({
 export const updateWalletSchema = selectWalletSchema.pick({
   tokens: true,
   updatedAt: true,
+  isBonusCollected: true,
 });
 
 export type Wallet = z.infer<typeof selectWalletSchema>;
