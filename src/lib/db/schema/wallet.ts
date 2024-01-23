@@ -5,7 +5,7 @@ import { pgTable, serial, text, integer, timestamp } from "drizzle-orm/pg-core";
 export const wallets = pgTable("wallets", {
   id: serial("id").primaryKey(),
   tokens: integer("tokens").notNull().default(0),
-  clerkUserId: text("clerk_user_id").notNull(),
+  clerkUserId: text("clerk_user_id").notNull().unique(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

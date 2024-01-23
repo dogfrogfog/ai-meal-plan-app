@@ -50,6 +50,13 @@
       "when": 1706037643379,
       "tag": "0006_useful_roulette",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1706039637438,
+      "tag": "0007_goofy_jigsaw",
+      "breakpoints": true
     }
   ]
 }
