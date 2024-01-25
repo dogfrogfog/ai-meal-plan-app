@@ -144,7 +144,17 @@ export function GenerationForm({
     } catch (e) {
       toast({
         title: "We are testing. Pease, try later.",
-        description: "Subscribe to out X at the meantime - @platemateai",
+        description: (
+          <div>
+            Subscribe to out X at the meantime -{" "}
+            <a
+              className="text-xl font-bold hover:underline"
+              href="https://x.com/platemateai"
+            >
+              @platemateai
+            </a>
+          </div>
+        ),
         variant: "destructive",
       });
     } finally {
