@@ -117,8 +117,7 @@ export function GenerationForm({
         title: "Not enough tokens 🥲.",
         description: (
           <div>
-            You need ${tokensRequired} tokens to generate ${days} days plan. Go
-            to{" "}
+            You need {tokensRequired} tokens to generate {days} days plan. Go to{" "}
             <Link
               href="/tokens"
               className="font-bold bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 text-white px-1 rounded"
