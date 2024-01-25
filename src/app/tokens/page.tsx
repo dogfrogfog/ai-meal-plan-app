@@ -7,28 +7,13 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { ClaimFreeTokensForm } from "@/components/ClaimFreeTokensForm";
-import { TokensCount } from "@/components/header/TokensCount";
 import { StripeCheckoutButton } from "@/components/StripeCheckoutButton";
 import { FREE_TOKENS_NUMBER } from "@/lib/constants";
 
 export default function TokensPage() {
   return (
-    <>
-      <Card className="w-[350px]">
-        <CardHeader>
-          <CardTitle>Tokens left</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-3xl font-semibold h-8">
-            <Suspense fallback={""}>
-              <TokensCount />
-            </Suspense>
-          </p>
-          {/* <p className="text-sm text-gray-500">~ 10 recipes</p> */}
-        </CardContent>
-      </Card>
-
-      <div className="flex justify-center gap-8 mt-12">
+    <div className="pt-1">
+      <div className="flex justify-center gap-6">
         <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
           <div>
             <CardHeader>
@@ -122,7 +107,7 @@ export default function TokensPage() {
           </CardFooter>
         </Card>
       </div>
-    </>
+    </div>
   );
 }
 

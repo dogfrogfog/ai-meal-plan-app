@@ -13,20 +13,22 @@ export async function ClaimFreeTokensForm() {
   if (wallet?.isBonusCollected) {
     return (
       <div className="w-full text-center">
-        <p className="text-xl font-bold leading-5">Claimed 🎉</p>
+        <p className="text-xl font-bold leading-10">Claimed 🎉</p>
       </div>
     );
   }
 
   async function handleClaimFreeTokens() {
     "use server";
-    await updateWallet(session?.user.id as string, {
+    const { wallet } = await updateWallet(session?.user.id as string, {
       updatedAt: new Date(),
       tokens: FREE_TOKENS_NUMBER,
       isBonusCollected: true,
     });
 
-    redirect("/");
+    if (wallet) {
+      redirect("/");
+    }
   }
 
   return (
