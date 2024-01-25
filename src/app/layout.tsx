@@ -66,7 +66,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ClerkProvider>
+          <ClerkProvider afterSignInUrl="/tokens" afterSignUpUrl="/tokens">
             <Navbar />
             <main className="mt-6 p-6 max-w-5xl mx-auto shadow bg-popover rounded-x">
               <Header />
