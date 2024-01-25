@@ -12,8 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   // todo: generate with ai
-  // title: "PlateMateAI | AI Meal Planner",
-  title: "ai",
+  title: "PlateMateAI | AI Meal Planner",
   description:
     "Experience the future of cooking with our AI—personalized recipes, efficiency, and savings.",
 };
