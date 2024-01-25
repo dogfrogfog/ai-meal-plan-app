@@ -23,12 +23,13 @@ export async function POST(req: Request) {
 
   // @ts-ignore
   const { clerkUserId } = event?.data.object?.metadata || {};
+  console.log("moneyReceived, webhook triggered");
+  console.log(clerkUserId);
+  console.log(event);
 
   if (!clerkUserId || !event) {
     return Response.json({ status: 401 });
   }
-  console.log("moneyReceived, webhook triggered");
-  console.log(event.data.object);
 
   switch (event.type) {
     case "checkout.session.completed":
