@@ -27,12 +27,12 @@ export async function POST(req: Request) {
   if (!clerkUserId || !event) {
     return Response.json({ status: 401 });
   }
+  console.log("moneyReceived, webhook triggered");
+  console.log(event.data.object);
 
   switch (event.type) {
     case "checkout.session.completed":
       const moneyReceived = event.data.object.amount_total;
-
-      console.log("moneyReceived, webhook triggered", moneyReceived);
 
       let tokens = 0;
       if (moneyReceived === 399) {
