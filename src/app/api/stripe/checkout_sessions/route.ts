@@ -1,11 +1,12 @@
 import { headers } from "next/headers";
+import { getAuth } from "@clerk/nextjs/server";
 import stripe from "@/lib/stripe";
-import { getUserAuth } from "@/lib/auth/utils";
+import { NextRequest } from "next/server";
 
 export async function POST(req: Request) {
   const origin = headers().get("origin");
   const { priceInCents, productName } = await req.json();
-  const { session: userSession } = await getUserAuth();
+  const { userId } = getAuth(req as NextRequest);
 
   const item = {
     price_data: {
@@ -18,9 +19,8 @@ export async function POST(req: Request) {
     quantity: 1,
   };
 
-  if (!userSession?.user.id) {
-    return Response.json({
-      userSession,
+  if (!userId) {
+    return Response.json(`User id: ${userId}`, {
       status: 401,
     });
   }
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       success_url: `${origin}/`,
       cancel_url: `${origin}/`,
       metadata: {
-        clerkUserId: userSession?.user.id as string,
+        clerkUserId: userId,
       },
     });
 
