@@ -71,11 +71,11 @@ const formSchema = z.object({
       message: "Must be at most 500, sorry",
     })
     .default(60),
-  productsToExclude: z.array(z.string()).optional(),
+  productsToExclude: z.string().optional(),
   cuisine: z.string().min(3, {
     message: "Cuisine must be at least 3 characters",
   }),
-  portions: z.coerce.number().min(1, {}).default(1),
+  // portions: z.coerce.number().min(1, {}).default(1),
 });
 
 export type FormValuesType = z.infer<typeof formSchema>;
@@ -94,17 +94,13 @@ export function GenerationForm({
       carbs: 270,
       protein: 110,
       fat: 60,
-      productsToExclude: [],
       cuisine: "european",
-      portions: 1,
+      // portions: 1,
       days: 1,
     }),
   });
 
   async function handleSubmit(values: FormValuesType) {
-    console.log(values);
-
-    return;
     setIsLoading(true);
     try {
       const { generation } = await onSubmit(values);
@@ -204,8 +200,7 @@ export function GenerationForm({
             )}
           />
         </div>
-        {/* <Separator className="my-8" /> */}
-        <h2 className="text-2xl mb-8">About food</h2>
+        <h2 className="text-2xl mb-8">About meals</h2>
         <div className="flex flex-wrap gap-4">
           <FormField
             control={form.control}
@@ -231,7 +226,7 @@ export function GenerationForm({
               </FormItem>
             )}
           />
-          <FormField
+          {/* <FormField
             control={form.control}
             name="portions"
             render={({ field }) => (
@@ -249,6 +244,24 @@ export function GenerationForm({
                 <FormDescription>to create grocery list</FormDescription>
               </FormItem>
             )}
+          /> */}
+          <FormField
+            control={form.control}
+            name="days"
+            render={({ field }) => (
+              <FormItem className="w-48">
+                <FormLabel>Number of days</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    disabled={isLoading}
+                    placeholder="1"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
           <FormField
             control={form.control}
@@ -257,18 +270,18 @@ export function GenerationForm({
               <FormItem className="w-[25rem]">
                 <FormLabel>Products to exclude</FormLabel>
                 <FormControl>
-                  <Textarea
-                    {...field}
-                    placeholder="Products you want to exclude from your meals"
-                  />
+                  <Textarea {...field} placeholder="eggs, milk, meat" />
                 </FormControl>
                 <FormMessage />
+                <FormDescription>
+                  comma separated list of products
+                </FormDescription>
               </FormItem>
             )}
           />
         </div>
         <div className="pt-12">
-          <SubmitButton>Generate plan</SubmitButton>
+          <SubmitButton isLoading={isLoading}>Generate plan</SubmitButton>
         </div>
       </form>
     </Form>

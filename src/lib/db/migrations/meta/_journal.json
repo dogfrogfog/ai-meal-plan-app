@@ -64,6 +64,20 @@
       "when": 1706041130961,
       "tag": "0008_burly_franklin_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1706200509941,
+      "tag": "0009_dashing_daredevil",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1706200626481,
+      "tag": "0010_glamorous_loki",
+      "breakpoints": true
     }
   ]
 }

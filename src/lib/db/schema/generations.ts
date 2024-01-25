@@ -7,7 +7,13 @@ export const generations = pgTable("generations", {
   clerkUserId: text("clerk_user_id").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
-  prompt: text("prompt").notNull(),
+  callories: integer("callories").notNull(),
+  protein: integer("protein").notNull(),
+  fat: integer("fat").notNull(),
+  carbs: integer("carbs").notNull(),
+  cuisine: text("cuisine").notNull(),
+  days: integer("days").notNull(),
+  productsToExclude: text("products_to_exclude"),
 });
 
 // Schema for CRUD - used to validate API requests
