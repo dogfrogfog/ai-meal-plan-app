@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     quantity: 1,
   };
 
-  if (!userSession) {
+  if (!userSession?.user.id) {
     return Response.json({
       userSession,
       status: 401,
