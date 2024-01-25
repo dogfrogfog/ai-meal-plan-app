@@ -8,6 +8,8 @@ export async function POST(req: Request) {
   const { priceInCents, productName } = await req.json();
   const { userId } = getAuth(req as NextRequest);
 
+  console.log(`userId in /api/stripe/checkout_session: ${userId}`);
+
   const item = {
     price_data: {
       currency: "EUR",
