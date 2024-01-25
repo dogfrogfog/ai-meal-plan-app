@@ -23,9 +23,6 @@ export async function POST(req: Request) {
 
   // @ts-ignore
   const { clerkUserId } = event?.data.object?.metadata || {};
-  console.log("moneyReceived, webhook triggered");
-  console.log(clerkUserId);
-  console.log(event);
 
   if (!clerkUserId || !event) {
     return Response.json({ status: 401 });
@@ -34,6 +31,8 @@ export async function POST(req: Request) {
   switch (event.type) {
     case "checkout.session.completed":
       const moneyReceived = event.data.object.amount_total;
+
+      console.log("✅ checkout.session.completed ✅");
 
       let tokens = 0;
       if (moneyReceived === 399) {

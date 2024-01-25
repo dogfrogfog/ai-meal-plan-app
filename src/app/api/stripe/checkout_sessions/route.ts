@@ -18,6 +18,13 @@ export async function POST(req: Request) {
     quantity: 1,
   };
 
+  if (!userSession) {
+    return Response.json({
+      userSession,
+      status: 401,
+    });
+  }
+
   try {
     const checkoutSession = await stripe.checkout.sessions.create({
       submit_type: "pay",
