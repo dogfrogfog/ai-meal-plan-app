@@ -1,1 +1,2 @@
 export const FREE_TOKENS_NUMBER = 2000;
+export const TOKENS_FOR_1_DAY_GENERATION = 600;

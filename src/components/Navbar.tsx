@@ -3,7 +3,6 @@ import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/ui/ThemeToggle";
 import Image from "next/image";
 import { TokensCount } from "@/components/header/TokensCount";
-import { Suspense } from "react";
 
 export default async function Navbar() {
   return (
@@ -21,14 +20,10 @@ export default async function Navbar() {
           </Link>
         </h1>
         <div className="space-x-4 flex items-center">
-          <Link href="/tokens" className="px-4 py-2 text-sm">
-            <span className="mr-1 bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
-              <Suspense fallback={""}>
-                <TokensCount />
-              </Suspense>
-            </span>
+          <Link href="/tokens">
+            <TokensCount />
           </Link>
-          <div className="flex justify-end w-16">
+          <div className="flex justify-end w-12">
             <UserButton afterSignOutUrl="/sign-in" />
           </div>
           <ModeToggle />

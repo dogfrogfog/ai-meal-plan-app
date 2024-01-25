@@ -24,6 +24,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "./SubmitButton";
 import { Textarea } from "@/components/ui/textarea";
+import { TOKENS_FOR_1_DAY_GENERATION } from "@/lib/constants";
+import Link from "next/link";
 
 const formSchema = z.object({
   days: z.coerce
@@ -82,8 +84,13 @@ export type FormValuesType = z.infer<typeof formSchema>;
 
 export function GenerationForm({
   onSubmit,
+  tokensAvailable,
 }: {
-  onSubmit: (values: FormValuesType) => ReturnType<typeof createGeneration>;
+  onSubmit: (
+    values: FormValuesType,
+    tokensRequired: number
+  ) => ReturnType<typeof createGeneration>;
+  tokensAvailable: number;
 }) {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -100,10 +107,34 @@ export function GenerationForm({
     }),
   });
 
+  const days = form.watch("days", 1);
+  const tokensRequired = days * TOKENS_FOR_1_DAY_GENERATION;
+  const isTokenEnough = tokensAvailable >= tokensRequired;
+
   async function handleSubmit(values: FormValuesType) {
+    if (!isTokenEnough) {
+      toast({
+        title: "Not enough tokens 🥲.",
+        description: (
+          <div>
+            You need ${tokensRequired} tokens to generate ${days} days plan. Go
+            to{" "}
+            <Link
+              href="/tokens"
+              className="font-bold bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 text-white px-1 rounded"
+            >
+              tokens page
+            </Link>{" "}
+            to buy more tokens.
+          </div>
+        ),
+      });
+      return;
+    }
+
     setIsLoading(true);
     try {
-      const { generation } = await onSubmit(values);
+      const { generation } = await onSubmit(values, tokensRequired);
 
       if (generation) {
         toast({
@@ -280,8 +311,24 @@ export function GenerationForm({
             )}
           />
         </div>
-        <div className="pt-12">
-          <SubmitButton isLoading={isLoading}>Generate plan</SubmitButton>
+        <div className="pt-6 flex gap-2 flex-col">
+          {/* <div> */}
+          {/* <span className="inline-block text-sm bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 text-white py-1 px-2 rounded"> */}
+          {/* {" "} */}
+          {/* </span> */}
+          {/* </div> */}
+          {/* <div> */}
+          <SubmitButton className="inline-block" isLoading={isLoading}>
+            {tokensRequired > 0 ? (
+              <>
+                Spend <strong>{tokensRequired} tokens</strong> and
+              </>
+            ) : (
+              ""
+            )}{" "}
+            generate a plan
+          </SubmitButton>
+          {/* </div> */}
         </div>
       </form>
     </Form>

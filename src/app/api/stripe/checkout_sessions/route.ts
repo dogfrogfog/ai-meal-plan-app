@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       payment_method_types: ["card"],
       line_items: [item],
       mode: "payment",
-      success_url: `${origin}/thank-you`,
+      success_url: `${origin}/`,
       cancel_url: `${origin}/`,
       metadata: {
         clerkUserId: userSession?.user.id as string,
