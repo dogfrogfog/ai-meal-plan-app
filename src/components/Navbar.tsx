@@ -17,7 +17,7 @@ export default async function Navbar() {
               height={60}
               width={60}
             />
-            AI Meal Planner
+            {/* AI Meal Planner */}
           </Link>
         </h1>
         <div className="space-x-4 flex items-center">

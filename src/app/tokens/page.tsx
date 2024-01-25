@@ -19,7 +19,7 @@ export default function TokensPage() {
           <CardTitle>Tokens left</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-3xl font-semibold">
+          <p className="text-3xl font-semibold h-8">
             <Suspense fallback={""}>
               <TokensCount />
             </Suspense>
