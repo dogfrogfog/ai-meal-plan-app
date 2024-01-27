@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 import { Webhook } from "svix";
 import { createWallet } from "@/lib/api/wallets/mutations";
 
+import { error, Tag, info } from "@/lib/logger";
+
 const CLERK_WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
 
 export async function POST(req: Request) {
@@ -20,6 +22,8 @@ export async function POST(req: Request) {
 
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
+    error("No svix headers found", [Tag.Clerk, Tag.WH]);
+
     return new Response("Error occured -- no svix headers", {
       status: 400,
     });
@@ -41,17 +45,18 @@ export async function POST(req: Request) {
       "svix-signature": svix_signature,
     }) as WebhookEvent;
   } catch (err) {
-    console.error("Error verifying webhook:", err);
-    return new Response("Error occured", {
-      status: 400,
-    });
+    error("Error verifying webhook", [Tag.Clerk, Tag.WH]);
+    throw new Error("Error verifying webhook");
   }
 
   const clerkUserId = evt.data.id as string;
   const eventType = evt.type;
 
-  if (!clerkUserId)
-    return new Response("No clerkUserId found", { status: 400 });
+  if (!clerkUserId) {
+    error("No clerkUserId found", [Tag.Clerk, Tag.WH, Tag.UserId]);
+
+    return new Response("api", { status: 400 });
+  }
 
   switch (eventType) {
     case "user.created":
@@ -60,19 +65,22 @@ export async function POST(req: Request) {
           clerkUserId,
         });
 
-        console.log("💳 wallet created");
-      } catch (error) {
-        return new Response(
-          `Error occured while creating wallet for the userId = ${clerkUserId}`,
-          {
-            status: 400,
-          }
+        info("💳 wallet created for the user", [Tag.Clerk, Tag.WH]);
+      } catch {
+        error(
+          `Error occured while creating wallet for the userId(${clerkUserId})`,
+          [Tag.Clerk, Tag.WH]
         );
+        return new Response(``, {
+          status: 400,
+        });
       }
       break;
     default:
       console.log(`Unhandled clerk event type ${eventType}`);
   }
+
+  info("Finished wotk succesfuly ✅", [Tag.Clerk, Tag.WH]);
 
   return new Response("", { status: 200 });
 }

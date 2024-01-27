@@ -1,13 +1,14 @@
-import { redirect } from "next/navigation";
-import { checkAuth, getUserAuth } from "@/lib/auth/utils";
+import { getUserAuth } from "@/lib/auth/utils";
 import { updateWallet } from "@/lib/api/wallets/mutations";
 import { getWalletByClerkUserId } from "@/lib/api/wallets/queries";
 import { FREE_TOKENS_NUMBER } from "@/lib/constants";
 import { SubmitButton } from "./SubmitButton";
+import { revalidatePath } from "next/cache";
+
+// import { info, Tag, error } from "@/lib/logger";
 
 export async function ClaimFreeTokensForm() {
-  await checkAuth();
-  const { session } = await getUserAuth();
+  const { session } = getUserAuth();
   const { wallet } = await getWalletByClerkUserId(session?.user.id as string);
 
   if (wallet?.isBonusCollected) {
@@ -20,14 +21,18 @@ export async function ClaimFreeTokensForm() {
 
   async function handleClaimFreeTokens() {
     "use server";
-    const { wallet } = await updateWallet(session?.user.id as string, {
-      updatedAt: new Date(),
-      tokens: FREE_TOKENS_NUMBER,
-      isBonusCollected: true,
-    });
+    try {
+      await updateWallet(session?.user.id as string, {
+        updatedAt: new Date(),
+        tokens: FREE_TOKENS_NUMBER,
+        isBonusCollected: true,
+      });
 
-    if (wallet) {
-      redirect("/");
+      revalidatePath("/tokens");
+      // info(`Successfuly claimed free tokens ✅`, [Tag.Wallet]);
+    } catch (err: any) {
+      console.log(err);
+      // error(`Failed to claim free tokens. ${err?.message}`, [Tag.Wallet]);
     }
   }
 

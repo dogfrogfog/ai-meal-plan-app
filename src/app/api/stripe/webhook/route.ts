@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import stripe, { Stripe } from "@/lib/stripe";
 import { updateWallet } from "@/lib/api/wallets/mutations";
 import { getWalletByClerkUserId } from "@/lib/api/wallets/queries";
+import { error, Tag, info } from "@/lib/logger";
 
 const webhookSecret =
   process.env.STRIPE_WEBHOOK_SECRET ||
@@ -16,7 +17,8 @@ export async function POST(req: Request) {
     event = stripe.webhooks.constructEvent(payload, signature!, webhookSecret);
   } catch (err) {
     if (err instanceof Error) {
-      console.error(err.message);
+      error("Stripe webhooks constructEvent failed", [Tag.Stripe, Tag.WH]);
+
       return Response.json({ message: err.message }, { status: 400 });
     }
   }
@@ -25,35 +27,56 @@ export async function POST(req: Request) {
   const { clerkUserId } = event?.data.object?.metadata || {};
 
   if (!clerkUserId || !event) {
-    return Response.json({ status: 401 });
+    error("No clerkUserId found", [Tag.Stripe, Tag.WH, Tag.UserId]);
+    return new Response("", { status: 401 });
   }
 
-  switch (event.type) {
-    case "checkout.session.completed":
-      const moneyReceived = event.data.object.amount_total;
+  try {
+    switch (event.type) {
+      case "checkout.session.completed":
+        const moneyReceived = event.data.object.amount_total;
 
-      console.log("✅ checkout.session.completed ✅");
+        let tokens = 0;
+        if (moneyReceived === 399) {
+          tokens = 5000;
+        }
 
-      let tokens = 0;
-      if (moneyReceived === 399) {
-        tokens = 5000;
-      }
+        if (moneyReceived === 999) {
+          tokens = 15000;
+        }
 
-      if (moneyReceived === 999) {
-        tokens = 15000;
-      }
+        info(`Checkout session completed for userId(${clerkUserId})`, [
+          Tag.Stripe,
+          Tag.WH,
+          Tag.UserId,
+        ]);
 
-      // делаем лишний запрос, надо переписать чтобы делать только 1 запрос
-      const { wallet } = await getWalletByClerkUserId(clerkUserId);
+        // делаем лишний запрос, надо переписать чтобы делать только 1 запрос
+        const { wallet } = await getWalletByClerkUserId(clerkUserId);
 
-      await updateWallet(clerkUserId, {
-        tokens: wallet.tokens + tokens,
-        updatedAt: new Date(),
-        isBonusCollected: false,
-      });
-      break;
-    default:
-      console.log(`Unhandled stripe event type ${event?.type}`);
+        await updateWallet(clerkUserId, {
+          tokens: wallet.tokens + tokens,
+          updatedAt: new Date(),
+          isBonusCollected: false,
+        });
+
+        info(
+          `Increased ballance on ${tokens} for userId(${clerkUserId}) successfuly`,
+          [Tag.Stripe, Tag.WH, Tag.UserId]
+        );
+        break;
+      default:
+        console.log(`Unhandled stripe event type ${event?.type}`);
+    }
+  } catch (e) {
+    error(`Error occured while updating wallet for userId(${clerkUserId})`, [
+      Tag.Stripe,
+      Tag.WH,
+      Tag.UserId,
+    ]);
+    return new Response(``, {
+      status: 400,
+    });
   }
 
   return Response.json({ status: 200 });

@@ -1,14 +1,10 @@
 import { headers } from "next/headers";
-import { getAuth } from "@clerk/nextjs/server";
 import stripe from "@/lib/stripe";
-import { NextRequest } from "next/server";
+import { error, Tag, info } from "@/lib/logger";
 
 export async function POST(req: Request) {
   const origin = headers().get("origin");
-  const { priceInCents, productName } = await req.json();
-  const { userId } = getAuth(req as NextRequest);
-
-  console.log(`userId in /api/stripe/checkout_session: ${userId}`);
+  const { priceInCents, productName, clerkUserId } = await req.json();
 
   const item = {
     price_data: {
@@ -21,8 +17,14 @@ export async function POST(req: Request) {
     quantity: 1,
   };
 
-  if (!userId) {
-    return Response.json(`User id: ${userId}`, {
+  if (!clerkUserId) {
+    error("No userId found to /api/stripe/checkout_sessions", [
+      Tag.Stripe,
+      Tag.WH,
+      Tag.UserId,
+    ]);
+
+    return new Response("", {
       status: 401,
     });
   }
@@ -33,16 +35,21 @@ export async function POST(req: Request) {
       payment_method_types: ["card"],
       line_items: [item],
       mode: "payment",
-      success_url: `${origin}/`,
-      cancel_url: `${origin}/`,
+      success_url: `${origin}/tokens?success=true`,
+      cancel_url: `${origin}/tokens?success=false`,
       metadata: {
-        clerkUserId: userId,
+        clerkUserId,
       },
     });
 
+    info(
+      `Checkout session created successfuly for userId(${clerkUserId}), redirecting to stripe... ﹩`,
+      [Tag.Stripe, Tag.WH]
+    );
     return Response.json({ sessionId: checkoutSession.id });
   } catch (err) {
-    console.log(err);
-    return Response.json({ error: "Error creating checkout session" });
+    error("Error creating stripe checkout session", [Tag.Stripe, Tag.WH]);
+
+    return new Response("", { status: 400 });
   }
 }
