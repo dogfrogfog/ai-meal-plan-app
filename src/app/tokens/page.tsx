@@ -1,16 +1,16 @@
-import React, { Suspense } from "react";
-import {
-  CardTitle,
-  CardHeader,
-  CardContent,
-  Card,
-  CardFooter,
-} from "@/components/ui/card";
 import { ClaimFreeTokensForm } from "@/components/ClaimFreeTokensForm";
+import { PaymentQueryStatusToast } from "@/components/PaymentQueryStatusToast";
 import { StripeCheckoutButton } from "@/components/StripeCheckoutButton";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { FREE_TOKENS_NUMBER } from "@/lib/constants";
 import { auth } from "@clerk/nextjs";
-import { PaymentQueryStatusToast } from "@/components/PaymentQueryStatusToast";
+import React, { Suspense } from "react";
 
 export default function TokensPage() {
   const { userId } = auth();
@@ -19,14 +19,14 @@ export default function TokensPage() {
     <>
       <div className="pt-1">
         <div className="flex justify-center gap-6">
-          <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
+          <Card className="bg-accent flex w-[350px] flex-col justify-between shadow-lg transition-all hover:scale-105">
             <div>
               <CardHeader>
-                <CardTitle className="flex gap-2 mb-4">
+                <CardTitle className="mb-4 flex gap-2">
                   <GiftIcon className="text-blue-500" />
                   {FREE_TOKENS_NUMBER} tokens
                 </CardTitle>
-                <h3 className="text-3xl font-bold mt-4">Free</h3>
+                <h3 className="mt-4 text-3xl font-bold">Free</h3>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center space-x-2">
@@ -41,14 +41,14 @@ export default function TokensPage() {
               </Suspense>
             </CardFooter>
           </Card>
-          <Card className="w-[350px] shadow-lg bg-accent border-2 transition-all hover:scale-105 border-purple-400 flex justify-between flex-col">
+          <Card className="bg-accent flex w-[350px] flex-col justify-between border-2 border-purple-400 shadow-lg transition-all hover:scale-105">
             <div>
               <CardHeader>
-                <CardTitle className="flex gap-2 mb-4">
+                <CardTitle className="mb-4 flex gap-2">
                   <StarIcon className="text-yellow-400" />
                   5000 tokens
                 </CardTitle>
-                <h3 className="text-3xl font-bold mt-4">$3.99</h3>
+                <h3 className="mt-4 text-3xl font-bold">$3.99</h3>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center space-x-2">
@@ -75,14 +75,14 @@ export default function TokensPage() {
               )}
             </CardFooter>
           </Card>
-          <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
+          <Card className="bg-accent flex w-[350px] flex-col justify-between shadow-lg transition-all hover:scale-105">
             <div>
               <CardHeader>
-                <CardTitle className="flex gap-2 mb-4">
+                <CardTitle className="mb-4 flex gap-2">
                   <DeleteIcon className="text-gray-500" />
                   15000 tokens
                 </CardTitle>
-                <h3 className="text-3xl font-bold mt-4">$9.99</h3>
+                <h3 className="mt-4 text-3xl font-bold">$9.99</h3>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center space-x-2">

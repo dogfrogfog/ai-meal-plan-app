@@ -57,7 +57,7 @@ export async function POST(req: Request) {
         await updateWallet(clerkUserId, {
           tokens: wallet.tokens + tokens,
           updatedAt: new Date(),
-          isBonusCollected: false,
+          isBonusCollected: wallet.isBonusCollected,
         });
 
         info(

@@ -1,13 +1,13 @@
-import { getUserAuth } from "@/lib/auth/utils";
-import { createGeneration } from "@/lib/api/generations/mutations";
 import { FormValuesType, GenerationForm } from "@/components/GenerationForm";
-import { getWalletByClerkUserId } from "@/lib/api/wallets/queries";
+import { createGeneration } from "@/lib/api/generations/mutations";
 import { updateWallet } from "@/lib/api/wallets/mutations";
+import { getWalletByClerkUserId } from "@/lib/api/wallets/queries";
+import { getUserAuth } from "@/lib/auth/utils";
 import { revalidatePath } from "next/cache";
 const ALLOWED_USERS = ["maksim.hodasevich@gmail.com", "platemateai@gmail.com"];
 
 export default async function GenerationPage() {
-  const { session } = await getUserAuth();
+  const { session } = getUserAuth();
   const { wallet } = await getWalletByClerkUserId(session?.user.id as string);
 
   async function onSubmit(values: FormValuesType, tokensRequired: number) {
@@ -32,5 +32,7 @@ export default async function GenerationPage() {
     }
   }
 
-  return <GenerationForm onSubmit={onSubmit} tokensAvailable={wallet.tokens} />;
+  return (
+    <GenerationForm onSubmit={onSubmit} tokensAvailable={wallet?.tokens || 0} />
+  );
 }

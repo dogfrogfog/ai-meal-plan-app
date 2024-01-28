@@ -1,9 +1,9 @@
-import { getUserAuth } from "@/lib/auth/utils";
 import { updateWallet } from "@/lib/api/wallets/mutations";
 import { getWalletByClerkUserId } from "@/lib/api/wallets/queries";
+import { getUserAuth } from "@/lib/auth/utils";
 import { FREE_TOKENS_NUMBER } from "@/lib/constants";
-import { SubmitButton } from "./SubmitButton";
 import { revalidatePath } from "next/cache";
+import { SubmitButton } from "./SubmitButton";
 
 // import { info, Tag, error } from "@/lib/logger";
 
@@ -24,7 +24,7 @@ export async function ClaimFreeTokensForm() {
     try {
       await updateWallet(session?.user.id as string, {
         updatedAt: new Date(),
-        tokens: FREE_TOKENS_NUMBER,
+        tokens: wallet.tokens + FREE_TOKENS_NUMBER,
         isBonusCollected: true,
       });
 
@@ -38,7 +38,7 @@ export async function ClaimFreeTokensForm() {
 
   return (
     <form action={handleClaimFreeTokens} className="w-full">
-      <SubmitButton className="w-full px-6 py-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600">
+      <SubmitButton className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 px-6 py-2">
         Claim FREE tokens
       </SubmitButton>
     </form>
