@@ -5,6 +5,7 @@ export default authMiddleware({
     "/api/stripe/webhook",
     "/api/stripe/checkout_sessions",
     "/api/clerk/webhook",
+    "/",
   ],
 });
 

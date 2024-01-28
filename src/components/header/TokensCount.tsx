@@ -12,7 +12,10 @@ export async function TokensCount() {
 
     return (
       <span className="text-sm mr-1 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 inline-block text-transparent text-white py-1 px-2 rounded">
-        <Suspense fallback={""}>{wallet?.tokens || 0} tokens</Suspense>
+        <Suspense fallback={""}>
+          {wallet?.tokens || 0} <span className="hidden sm:inline">tokens</span>{" "}
+          <span className="sm:hidden">t</span>
+        </Suspense>
       </span>
     );
   }

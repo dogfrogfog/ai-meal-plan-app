@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, SignedOut } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/ui/ThemeToggle";
 import Image from "next/image";
 import { TokensCount } from "@/components/header/TokensCount";
@@ -16,16 +16,24 @@ export default async function Navbar() {
               height={60}
               width={60}
             />
-            AI Meal Planner
+            <span className="hidden sm:inline">AI Meal Planner</span>
           </Link>
         </h1>
-        <div className="space-x-4 flex items-center">
+        <div className="space-x-2 flex items-center">
           <Link href="/tokens">
             <TokensCount />
           </Link>
-          <div className="flex justify-end w-12">
+          <div className="flex justify-end w-8">
             <UserButton afterSignOutUrl="/sign-in" />
           </div>
+          <SignedOut>
+            <Link
+              href="/sign-up"
+              className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-white py-1 px-2 rounded text-md"
+            >
+              Sign Up
+            </Link>
+          </SignedOut>
           <ModeToggle />
         </div>
       </nav>
