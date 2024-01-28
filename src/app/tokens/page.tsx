@@ -9,105 +9,118 @@ import {
 import { ClaimFreeTokensForm } from "@/components/ClaimFreeTokensForm";
 import { StripeCheckoutButton } from "@/components/StripeCheckoutButton";
 import { FREE_TOKENS_NUMBER } from "@/lib/constants";
+import { auth } from "@clerk/nextjs";
+import { PaymentQueryStatusToast } from "@/components/PaymentQueryStatusToast";
 
 export default function TokensPage() {
+  const { userId } = auth();
+
   return (
-    <div className="pt-1">
-      <div className="flex justify-center gap-6">
-        <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
-          <div>
-            <CardHeader>
-              <CardTitle className="flex gap-2 mb-4">
-                <GiftIcon className="text-blue-500" />
-                {FREE_TOKENS_NUMBER} tokens
-              </CardTitle>
-              <h3 className="text-3xl font-bold mt-4">Free</h3>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center space-x-2">
-                <CheckIcon className="text-green-500" />
-                <span>Grab a bonus</span>
-              </div>
-            </CardContent>
-          </div>
-          <CardFooter>
-            <Suspense>
-              <ClaimFreeTokensForm />
-            </Suspense>
-          </CardFooter>
-        </Card>
-        <Card className="w-[350px] shadow-lg bg-accent border-2 transition-all hover:scale-105 border-purple-400 flex justify-between flex-col">
-          <div>
-            <CardHeader>
-              <CardTitle className="flex gap-2 mb-4">
-                <StarIcon className="text-yellow-400" />
-                5000 tokens
-              </CardTitle>
-              <h3 className="text-3xl font-bold mt-4">$3.99</h3>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center space-x-2">
-                <CheckIcon className="text-green-500" />
-                <span>Benefit</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckIcon className="text-green-500" />
-                <span>Benefit</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckIcon className="text-green-500" />
-                <span>Benefit</span>
-              </div>
-            </CardContent>
-          </div>
-          <CardFooter>
-            <StripeCheckoutButton
-              priceInCents={399}
-              productName="Pack of 5000 generation tokens 🪄"
-            />
-          </CardFooter>
-        </Card>
-        <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
-          <div>
-            <CardHeader>
-              <CardTitle className="flex gap-2 mb-4">
-                <DeleteIcon className="text-gray-500" />
-                15000 tokens
-              </CardTitle>
-              <h3 className="text-3xl font-bold mt-4">$9.99</h3>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center space-x-2">
-                <CheckIcon className="text-green-500" />
-                <span>Benefit</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckIcon className="text-green-500" />
-                <span>Benefit</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckIcon className="text-green-500" />
-                <span>Benefit</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckIcon className="text-green-500" />
-                <span>Benefit</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckIcon className="text-green-500" />
-                <span>Benefit</span>
-              </div>
-            </CardContent>
-          </div>
-          <CardFooter>
-            <StripeCheckoutButton
-              priceInCents={999}
-              productName="The biggest pack of 15000 generation tokens 🦾"
-            />
-          </CardFooter>
-        </Card>
+    <>
+      <div className="pt-1">
+        <div className="flex justify-center gap-6">
+          <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
+            <div>
+              <CardHeader>
+                <CardTitle className="flex gap-2 mb-4">
+                  <GiftIcon className="text-blue-500" />
+                  {FREE_TOKENS_NUMBER} tokens
+                </CardTitle>
+                <h3 className="text-3xl font-bold mt-4">Free</h3>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center space-x-2">
+                  <CheckIcon className="text-green-500" />
+                  <span>Grab a bonus</span>
+                </div>
+              </CardContent>
+            </div>
+            <CardFooter>
+              <Suspense>
+                <ClaimFreeTokensForm />
+              </Suspense>
+            </CardFooter>
+          </Card>
+          <Card className="w-[350px] shadow-lg bg-accent border-2 transition-all hover:scale-105 border-purple-400 flex justify-between flex-col">
+            <div>
+              <CardHeader>
+                <CardTitle className="flex gap-2 mb-4">
+                  <StarIcon className="text-yellow-400" />
+                  5000 tokens
+                </CardTitle>
+                <h3 className="text-3xl font-bold mt-4">$3.99</h3>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center space-x-2">
+                  <CheckIcon className="text-green-500" />
+                  <span>Benefit</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckIcon className="text-green-500" />
+                  <span>Benefit</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckIcon className="text-green-500" />
+                  <span>Benefit</span>
+                </div>
+              </CardContent>
+            </div>
+            <CardFooter>
+              {userId && (
+                <StripeCheckoutButton
+                  userId={userId}
+                  priceInCents={399}
+                  productName="Pack of 5000 generation tokens 🪄"
+                />
+              )}
+            </CardFooter>
+          </Card>
+          <Card className="w-[350px] transition-all hover:scale-105 shadow-lg bg-accent flex justify-between flex-col">
+            <div>
+              <CardHeader>
+                <CardTitle className="flex gap-2 mb-4">
+                  <DeleteIcon className="text-gray-500" />
+                  15000 tokens
+                </CardTitle>
+                <h3 className="text-3xl font-bold mt-4">$9.99</h3>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center space-x-2">
+                  <CheckIcon className="text-green-500" />
+                  <span>Benefit</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckIcon className="text-green-500" />
+                  <span>Benefit</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckIcon className="text-green-500" />
+                  <span>Benefit</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckIcon className="text-green-500" />
+                  <span>Benefit</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckIcon className="text-green-500" />
+                  <span>Benefit</span>
+                </div>
+              </CardContent>
+            </div>
+            <CardFooter>
+              {userId && (
+                <StripeCheckoutButton
+                  userId={userId}
+                  priceInCents={999}
+                  productName="The biggest pack of 15000 generation tokens 🦾"
+                />
+              )}
+            </CardFooter>
+          </Card>
+        </div>
       </div>
-    </div>
+      <PaymentQueryStatusToast />
+    </>
   );
 }
 

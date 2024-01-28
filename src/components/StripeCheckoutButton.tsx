@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 export function StripeCheckoutButton({
   priceInCents,
   productName,
+  userId,
 }: {
   priceInCents: number;
   productName: string;
+  userId: string;
 }) {
   const redirectToCheckout = async () => {
     try {
@@ -25,6 +27,7 @@ export function StripeCheckoutButton({
         body: JSON.stringify({
           productName,
           priceInCents,
+          clerkUserId: userId,
         }),
       });
 

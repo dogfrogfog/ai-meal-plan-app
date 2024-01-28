@@ -32,7 +32,5 @@ export default async function GenerationPage() {
     }
   }
 
-  console.log(wallet);
-
   return <GenerationForm onSubmit={onSubmit} tokensAvailable={wallet.tokens} />;
 }
