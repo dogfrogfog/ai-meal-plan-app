@@ -48,7 +48,7 @@ export default function TokensPage() {
                   <StarIcon className="text-yellow-400" />
                   5000 tokens
                 </CardTitle>
-                <h3 className="text-3xl font-bold mt-4">$3.99</h3>
+                <h3 className="text-3xl font-bold mt-4">$0.99</h3>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center space-x-2">
@@ -69,7 +69,7 @@ export default function TokensPage() {
               {userId && (
                 <StripeCheckoutButton
                   userId={userId}
-                  priceInCents={399}
+                  priceInCents={99}
                   productName="Pack of 5000 generation tokens 🪄"
                 />
               )}
@@ -82,7 +82,7 @@ export default function TokensPage() {
                   <DeleteIcon className="text-gray-500" />
                   15000 tokens
                 </CardTitle>
-                <h3 className="text-3xl font-bold mt-4">$9.99</h3>
+                <h3 className="text-3xl font-bold mt-4">$2.49</h3>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center space-x-2">
@@ -111,7 +111,7 @@ export default function TokensPage() {
               {userId && (
                 <StripeCheckoutButton
                   userId={userId}
-                  priceInCents={999}
+                  priceInCents={249}
                   productName="The biggest pack of 15000 generation tokens 🦾"
                 />
               )}

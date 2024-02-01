@@ -37,11 +37,11 @@ export async function POST(req: Request) {
         const moneyReceived = event.data.object.amount_total;
 
         let tokens = 0;
-        if (moneyReceived === 399) {
+        if (moneyReceived === 99) {
           tokens = 5000;
         }
 
-        if (moneyReceived === 999) {
+        if (moneyReceived === 249) {
           tokens = 15000;
         }
 
