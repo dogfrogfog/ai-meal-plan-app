@@ -9,7 +9,7 @@ export default async function HistoryPage() {
 
   const { generations } = await getGenerationsByClerkUserId(session.user.id);
 
-  console.log(generations);
-
-  return <DataTable />;
+  console.log("passing to dataTAbel", generations);
+  // @ts-ignore
+  return <DataTable data={generations} />;
 }

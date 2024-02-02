@@ -22,8 +22,10 @@ export const getGenerationById = async (id: GenerationId) => {
 };
 
 export const getGenerationsByClerkUserId = async (clerkUserId: string) => {
-  const [g] =
-    await sql`SELECT * FROM generations WHERE clerk_user_id = ${clerkUserId}`;
+  const generationsData = await db
+    .select()
+    .from(generations)
+    .where(eq(generations.clerkUserId, clerkUserId));
 
-  return { generations: g };
+  return { generations: generationsData };
 };
