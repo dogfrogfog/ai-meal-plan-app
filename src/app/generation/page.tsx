@@ -15,6 +15,8 @@ export default async function GenerationPage() {
     if (ALLOWED_USERS.includes(session?.user.email || "")) {
       const data = await createGeneration({
         clerkUserId: session?.user.id as string,
+        createdAt: new Date(),
+        updatedAt: new Date(),
         ...values,
       });
 
