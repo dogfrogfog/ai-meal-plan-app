@@ -3,7 +3,7 @@ import { z } from "zod";
 import { pgTable, serial, text, integer, timestamp } from "drizzle-orm/pg-core";
 
 export const generations = pgTable("generations", {
-  id: serial("id").primaryKey(),
+  id: serial("id").primaryKey().unique(),
   clerkUserId: text("clerk_user_id").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),

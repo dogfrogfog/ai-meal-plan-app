@@ -1,4 +1,4 @@
-import { db } from "@/lib/db/index";
+import { db, sql } from "@/lib/db/index";
 import { eq } from "drizzle-orm";
 import {
   generationIdSchema,
@@ -19,4 +19,11 @@ export const getGenerationById = async (id: GenerationId) => {
     .where(eq(generations.id, generationId));
 
   return { generation: g };
+};
+
+export const getGenerationsByClerkUserId = async (clerkUserId: string) => {
+  const [g] =
+    await sql`SELECT * FROM generations WHERE clerk_user_id = ${clerkUserId}`;
+
+  return { generations: g };
 };

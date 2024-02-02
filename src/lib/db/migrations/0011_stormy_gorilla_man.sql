@@ -1,0 +1,1 @@
+ALTER TABLE "generations" ADD CONSTRAINT "generations_id_unique" UNIQUE("id");

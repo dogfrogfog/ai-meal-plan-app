@@ -254,7 +254,7 @@ export function GenerationForm({
                       <SelectValue placeholder="European" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value={"european"}>European</SelectItem>
+                      <SelectItem value="european">European</SelectItem>
                       <SelectItem value="asian">Asian</SelectItem>
                       <SelectItem value="american">American</SelectItem>
                       <SelectItem value="mexican">Mexican</SelectItem>
