@@ -380,7 +380,7 @@ export function GenerationForm({
             Current version of the app uses free model to create meal plans.
             Response could be unexpected.
             <a
-              href="mailto:dogfrogfog@proton.me"
+              href="https://x.com/platemateai"
               className="underline text-blue-600 hover:text-blue-800"
             >
               👉 contact us if you have any problems/questions

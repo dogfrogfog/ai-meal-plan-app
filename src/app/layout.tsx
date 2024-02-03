@@ -71,6 +71,21 @@ export default function RootLayout({
               <Header />
               {children}
             </main>
+            <footer>
+              <div className="text-center text-sm p-4">
+                <p>
+                  {/* Project is looking for  contributors.{" "} */}
+                  <a
+                    href="https://x.com/platemateai"
+                    className="font-bold"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    connect with us
+                  </a>
+                </p>
+              </div>
+            </footer>
           </ClerkProvider>
           <Toaster />
         </ThemeProvider>
