@@ -7,6 +7,7 @@ import {
   GenerationId,
   NewGeneration,
   updateGenerationSchema,
+  UpdatedGeneration,
 } from "@/lib/db/schema/generations";
 
 export const createGeneration = async (generation: NewGeneration) => {
@@ -23,7 +24,7 @@ export const createGeneration = async (generation: NewGeneration) => {
 
 export const updateGeneration = async (
   id: GenerationId,
-  generation: NewGeneration
+  generation: UpdatedGeneration
 ) => {
   const { id: generationId } = generationIdSchema.parse({ id });
   const newGeneration = updateGenerationSchema.parse(generation);
