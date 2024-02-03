@@ -214,7 +214,7 @@ export function GenerationForm({
         }}
       />
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <h2 className="text-2xl mb-8">About you</h2>
+        <h2 className="text-2xl mb-8">📐📐📐</h2>
         <div className="flex flex-wrap gap-4 mb-12">
           <FormField
             control={form.control}
@@ -289,7 +289,7 @@ export function GenerationForm({
             )}
           />
         </div>
-        <h2 className="text-2xl mb-8">About meals</h2>
+        <h2 className="text-2xl mb-8">🥘🥘🥘</h2>
         <div className="flex flex-wrap gap-4">
           <FormField
             control={form.control}
@@ -376,6 +376,16 @@ export function GenerationForm({
           {/* </span> */}
           {/* </div> */}
           {/* <div> */}
+          <div className="mt-4 rounded bg-green-300 text-xs p-4 flex gap-4 font-bold justify-between">
+            Current version of the app uses free model to create meal plans.
+            Response could be unexpected.
+            <a
+              href="mailto:dogfrogfog@proton.me"
+              className="underline text-blue-600 hover:text-blue-800"
+            >
+              👉 contact us if you have any problems/questions
+            </a>
+          </div>
           <SubmitButton className="inline-block" isLoading={isLoading}>
             {tokensRequired > 0 ? (
               <>
