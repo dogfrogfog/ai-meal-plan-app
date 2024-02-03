@@ -26,6 +26,7 @@ import { SubmitButton } from "./SubmitButton";
 import { Textarea } from "@/components/ui/textarea";
 import { TOKENS_FOR_1_DAY_GENERATION } from "@/lib/constants";
 import Link from "next/link";
+import NutritionCalculator from "./NutritionCalculator";
 
 const formSchema = z.object({
   days: z.coerce
@@ -164,6 +165,14 @@ export function GenerationForm({
 
   return (
     <Form {...form}>
+      <NutritionCalculator
+        onSubmit={({ carbs, fat, protein, ...rest }: any) => {
+          form.setValue("carbs", parseInt(carbs));
+          form.setValue("fat", parseInt(fat));
+          form.setValue("protein", parseInt(protein));
+          form.setValue("callories", parseInt(rest.tdee));
+        }}
+      />
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <h2 className="text-2xl mb-8">About you</h2>
         <div className="flex flex-wrap gap-4 mb-12">

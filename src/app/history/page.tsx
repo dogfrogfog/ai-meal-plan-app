@@ -10,6 +10,8 @@ export default async function HistoryPage() {
   const { generations } = await getGenerationsByClerkUserId(session.user.id);
 
   console.log("passing to dataTAbel", generations);
-  // @ts-ignore
-  return <DataTable data={generations} />;
+  return (
+    // @ts-ignore
+    <DataTable data={generations.sort((a, b) => b?.createdAt - a?.createdAt)} />
+  );
 }
