@@ -14,14 +14,19 @@ export const generations = pgTable("generations", {
   cuisine: text("cuisine").notNull(),
   days: integer("days").notNull(),
   productsToExclude: text("products_to_exclude"),
+  aiResponse: text("ai_response"),
 });
 
 // Schema for CRUD - used to validate API requests
 export const insertGenerationSchema = createInsertSchema(generations);
 export const selectGenerationSchema = createSelectSchema(generations);
 export const generationIdSchema = selectGenerationSchema.pick({ id: true });
-export const updateGenerationSchema = selectGenerationSchema;
+export const updateGenerationSchema = selectGenerationSchema.pick({
+  aiResponse: true,
+  updatedAt: true,
+});
 
 export type Generation = z.infer<typeof selectGenerationSchema>;
 export type NewGeneration = z.infer<typeof insertGenerationSchema>;
+export type UpdatedGeneration = z.infer<typeof updateGenerationSchema>;
 export type GenerationId = z.infer<typeof generationIdSchema>["id"];

@@ -1,5 +1,8 @@
 import { getUserAuth } from "@/lib/auth/utils";
-import { createGeneration } from "@/lib/api/generations/mutations";
+import {
+  createGeneration,
+  updateGeneration,
+} from "@/lib/api/generations/mutations";
 import { FormValuesType, GenerationForm } from "@/components/GenerationForm";
 import { getWalletByClerkUserId } from "@/lib/api/wallets/queries";
 import { updateWallet } from "@/lib/api/wallets/mutations";
@@ -34,5 +37,24 @@ export default async function GenerationPage() {
     }
   }
 
-  return <GenerationForm onSubmit={onSubmit} tokensAvailable={wallet.tokens} />;
+  async function addAiAnswerToGeneration({ generation, message }: any) {
+    "use server";
+
+    console.log("generation, message");
+    console.log(generation, message);
+    const data = await updateGeneration(generation.id, {
+      aiResponse: message,
+      updatedAt: new Date(),
+    });
+
+    return data;
+  }
+
+  return (
+    <GenerationForm
+      onSubmit={onSubmit}
+      addAiAnswerToGeneration={addAiAnswerToGeneration}
+      tokensAvailable={wallet.tokens}
+    />
+  );
 }

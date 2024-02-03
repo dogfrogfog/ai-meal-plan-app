@@ -1,8 +1,9 @@
 "use client";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useChat } from "ai/react";
 import * as z from "zod";
 import {
   Select,
@@ -27,6 +28,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { TOKENS_FOR_1_DAY_GENERATION } from "@/lib/constants";
 import Link from "next/link";
 import NutritionCalculator from "./NutritionCalculator";
+
+const getPromptWithParams = (formValues: FormValuesType) =>
+  `I want to generate a meal plan for 1 day with ${formValues.callories} callories, ${formValues.protein}g protein, ${formValues.carbs}g carbs, ${formValues.fat}g fat. Meal should be ${formValues.cuisine} cuisine. Meat should exclude the following products: ${formValues.productsToExclude}. Response should include only information about the meals, their nutricion scores and short recipies.`;
+// `I want to generate a meal plan for 1 day with ${} callories, ${protein}g protein, ${carbs}g carbs, ${fat}g fat. Meal should `;
 
 const formSchema = z.object({
   days: z.coerce
@@ -86,14 +91,18 @@ export type FormValuesType = z.infer<typeof formSchema>;
 export function GenerationForm({
   onSubmit,
   tokensAvailable,
+  addAiAnswerToGeneration,
 }: {
   onSubmit: (
     values: FormValuesType,
     tokensRequired: number
   ) => ReturnType<typeof createGeneration>;
+  addAiAnswerToGeneration: any;
   tokensAvailable: number;
 }) {
+  const { messages, append, ...s } = useChat();
   const { toast } = useToast();
+
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<FormValuesType>({
     resolver: zodResolver(formSchema),
@@ -136,10 +145,34 @@ export function GenerationForm({
     try {
       const { generation } = await onSubmit(values, tokensRequired);
 
+      await append(
+        {
+          role: "user",
+          content: getPromptWithParams(values),
+        },
+        {
+          options: {
+            body: {
+              generationId: generation.id,
+            },
+          },
+        }
+      );
+
+      const userMessages = messages.filter((v) => v.role !== "user");
+      if (userMessages.length) {
+        const lastMessage = userMessages[userMessages.length - 1];
+
+        await addAiAnswerToGeneration({
+          generation,
+          message: lastMessage.content,
+        });
+      }
+
       if (generation) {
         toast({
-          title: "Successfully start processing.",
-          description: "Please, wait for generation.",
+          title: "Successfully generated a meal plan 🥳!",
+          description: "Thank you for your trust 🫂",
         });
       }
     } catch (e) {
@@ -165,6 +198,13 @@ export function GenerationForm({
 
   return (
     <Form {...form}>
+      {messages
+        .filter((v) => v.role !== "user")
+        .map((m) => (
+          <div key={m.id} className="whitespace-pre-wrap">
+            {m.content}
+          </div>
+        ))}
       <NutritionCalculator
         onSubmit={({ carbs, fat, protein, ...rest }: any) => {
           form.setValue("carbs", parseInt(carbs));
