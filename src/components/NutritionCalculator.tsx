@@ -12,13 +12,26 @@ export default function NutritionCalculator({ onSubmit }: any) {
   const [age, setAge] = useState(0);
 
   return (
-    <div className="rounded scale-90">
-      <h1>Nutrition Calculator</h1>
+    <div className="rounded">
+      <p className="mb-4">
+        To generate meal plan you need to provide callories, carbs, protein and
+        fat.
+      </p>
+      <p className="mb-4">
+        If you know your numbers - fill the form, you dont need a generation!
+      </p>
+      <p className="mb-4">
+        If you don{"'"}t know - you can calculate it by providing some info
+      </p>
       <div className="my-4 flex">
         <span className="rounded-xl bg-red-100 p-2">
           This is only an estimate, and could not be 100% accurate.
           <br />
           If this information is important, consult with your doctor!
+          <br />
+          <br />
+          You can also provide values in the form without generation if you know
+          them
         </span>
       </div>
       <form className="flex flex-wrap gap-4 items-end mb-12">
